@@ -1,10 +1,11 @@
 import requests
 import configparser
+import sqlite3
 
 # config.iniファイルの読み込み
 config_ini = configparser.ConfigParser()
 config_ini.read('config.ini', encoding='utf-8')
-API_KEY = config_ini['DEFAULT']['key']
+api_key = config_ini['DEFAULT']['key']
 
 REGION = 'kr'  # 韓国サーバー
 
@@ -43,14 +44,14 @@ def get_match_details(api_key, region, match_id):
 
 # メインの処理
 def main():
-    summoner_ids = get_challenger_summoners(API_KEY, REGION)
+    summoner_ids = get_challenger_summoners(api_key, REGION)
     all_matches = []
 
     for summoner_id in summoner_ids:
-        matches = get_matchlist(API_KEY, REGION, summoner_id)
+        matches = get_matchlist(api_key, REGION, summoner_id)
         for match in matches:
             match_id = match['gameId']
-            match_details = get_match_details(API_KEY, REGION, match_id)
+            match_details = get_match_details(api_key, REGION, match_id)
             all_matches.append(match_details)
 
     # 収集した試合の詳細データの表示（または保存）
