@@ -1,23 +1,8 @@
 import streamlit as st
 
 import pandas as pd
-import requests
-import configparser
-import sqlite3
-import time
 
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-
-import matplotlib.pyplot as plt
-import japanize_matplotlib
-import seaborn as sns
-
-
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-
 import joblib
 
 # チャンピオン名とIDの対応リストを辞書に変換
@@ -274,7 +259,7 @@ if st.button("予測を実行"):
                 'champion_100_1', 'champion_100_2', 'champion_100_3', 'champion_100_4', 'champion_100_5',
         'champion_200_1', 'champion_200_2', 'champion_200_3', 'champion_200_4', 'champion_200_5'
     ])
-    
+
     if len(champion_ids_100) == 5 and len(champion_ids_200) == 5:
         prediction, win_probability = predict_match(loaded_model, champion_ids_100, champion_ids_200, X)
 
